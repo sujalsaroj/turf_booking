@@ -44,7 +44,13 @@ const AddTurf = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     console.log("Turf Data Submitted:", formData);
+    setFormData({
+      slots: [""],
+    });
+    e.target.reset();
+
     // Send data to backend later
   };
 

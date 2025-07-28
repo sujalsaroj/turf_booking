@@ -14,13 +14,16 @@ import BookTurf from "../pages/bookturf";
 import ViewBookings from "../pages/viewbooking";
 import RaiseConnection from "../pages/raiseconnection";
 import JoinConnection from "../pages/JoinMatch";
-import Homepage from "../pages/Home";
 import About from "../pages/about";
 import Contact from "../pages/contactus";
+import Homepage from "../pages/Home";
+import { Navigate } from "react-router-dom";
 
 const AppRoutes = () => {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/home" element={<Homepage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard-player" element={<DashboardPlayer />} />
@@ -33,7 +36,6 @@ const AppRoutes = () => {
       <Route path="/manageturf" element={<ManageTurf />} />
       <Route path="/bookTurf" element={<BookTurf />} />
       <Route path="/mybooking" element={<ViewBookings />} />
-      <Route path="/home" element={<Homepage />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact-us" element={<Contact />} />
     </Routes>
