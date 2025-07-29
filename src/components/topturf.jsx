@@ -14,7 +14,7 @@ function TopTurf() {
             {/* Turf Card 1 */}
             <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition duration-300">
               <img
-                src="https://via.placeholder.com/300x200"
+                src="/images/img1.jpeg"
                 alt="Turf Image"
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
@@ -28,7 +28,7 @@ function TopTurf() {
             {/* Turf Card 2 */}
             <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition duration-300">
               <img
-                src="https://via.placeholder.com/300x200"
+                src="D:/tuef_booking_system/turf_booking/src/images/img2.jpg300x200"
                 alt="Turf Image"
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
@@ -42,7 +42,7 @@ function TopTurf() {
             {/* Turf Card 3 */}
             <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition duration-300">
               <img
-                src="https://via.placeholder.com/300x200"
+                src="D:/tuef_booking_system/turf_booking/src/images/img3.jpg300x200"
                 alt="Turf Image"
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />

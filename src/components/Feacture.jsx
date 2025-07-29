@@ -44,7 +44,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-100 to-gray-300 text-center border-none ">
+    <section className="py-20 bg-gradient-to-b from-white to-gray-300 text-center border-none ">
       <h2 className="text-4xl font-extrabold mb-12 text-gray-800 tracking-tight">
         Why Choose <span className="text-indigo-600">PlayConnect?</span>
       </h2>

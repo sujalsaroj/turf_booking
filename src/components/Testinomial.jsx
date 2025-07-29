@@ -1,7 +1,7 @@
 function Testinomial() {
   return (
     <>
-      <section className="bg-gray-300 py-16 px-4 px-20 ">
+      <section className="bg-gradient-to-b from-gray-300 to-gray-400  py-16 px-4 px-20 ">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
           What Our Users Say
         </h2>
