@@ -17,13 +17,11 @@ import JoinConnection from "../pages/JoinMatch";
 import About from "../pages/about";
 import Contact from "../pages/contactus";
 import Homepage from "../pages/Home";
-import { Navigate } from "react-router-dom";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/home" />} />
-      <Route path="/home" element={<Homepage />} />
+      <Route path="/" element={<Homepage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard-player" element={<DashboardPlayer />} />
