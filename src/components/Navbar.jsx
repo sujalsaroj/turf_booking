@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    // Check for user in localStorage
     const storedUser = JSON.parse(localStorage.getItem("user"));
     setUser(storedUser);
 
+    // Optional: Listen for changes in localStorage
     const handleStorageChange = () => {
       const updatedUser = JSON.parse(localStorage.getItem("user"));
       setUser(updatedUser);
@@ -21,6 +22,7 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
+    // Optional: Redirect to home after logout
     window.location.href = "/";
   };
 
@@ -32,150 +34,130 @@ export default function Navbar() {
           PlayConnect
         </Link>
 
-        {/* Hamburger Button (visible on mobile) */}
-        <button
-          className="md:hidden text-white focus:outline-none"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
-
-        {/* Desktop Links */}
+        {/* Navigation Links */}
         <div className="hidden md:flex space-x-7 text-xl">
-          <NavLinks />
+          <Link
+            to="/home"
+            className="relative group px-3 py-2 text-white text-lg"
+          >
+            Home
+            <span className="absolute left-1/2 -translate-x-1/2 bottom-[-11px] h-[2px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+
+          <Link
+            to="/dashboard-player"
+            className="relative group px-3 py-2 text-white text-lg"
+          >
+            Book Turf
+            <span className="absolute left-1/2 -translate-x-1/2 bottom-[-11px] h-[2px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+
+          <Link
+            to="/dashboard-turf-owner"
+            className="relative group px-3 py-2 text-white text-lg"
+          >
+            My Turf
+            <span className="absolute left-1/2 -translate-x-1/2 bottom-[-11px] h-[2px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+
+          <Link
+            to="/about"
+            className="relative group px-3 py-2 text-white text-lg"
+          >
+            About
+            <span className="absolute left-1/2 -translate-x-1/2 bottom-[-11px] h-[2px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+
+          <Link
+            to="/contact-us"
+            className="relative group px-3 py-2 text-white text-lg"
+          >
+            Contact
+            <span className="absolute left-1/2 -translate-x-1/2 bottom-[-11px] h-[2px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </Link>
         </div>
 
-        {/* Right Side: Auth/User */}
-        <div className="hidden md:flex items-center space-x-4">
+        {/* Right Side: Avatar or Login/Register */}
+        <div className="flex items-center space-x-4">
           {user ? (
-            <UserDropdown user={user} onLogout={handleLogout} />
+            <div className="flex items-center gap-4">
+              {/* Notification */}
+              <button className="hover:text-gray-300 relative">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0018 9.75V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                  />
+                </svg>
+                <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+
+              {/* Avatar with dropdown menu */}
+              <div className="relative group">
+                <Link to="/profile" className="flex items-center gap-2">
+                  <img
+                    src={
+                      user.photoURL ||
+                      "D:/tuef_booking_systemturf_bookingsrcimagesavatar.jpg"
+                    }
+                    alt="Profile"
+                    width={36}
+                    height={36}
+                    className="rounded-full border-2 border-white hover:scale-105 transition"
+                  />
+                  <span className="hidden md:inline font-medium">
+                    {user.displayName || user.email.split("@")[0]}
+                  </span>
+                </Link>
+
+                {/* Dropdown menu */}
+                <div className="absolute right-0 mt-2 w-48 bg-white text-green-900 rounded-md shadow-lg py-1 hidden group-hover:block z-50">
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-2 hover:bg-green-100"
+                  >
+                    My Profile
+                  </Link>
+                  <Link
+                    to="/my-booking"
+                    className="block px-4 py-2 hover:bg-green-100"
+                  >
+                    My Bookings
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 hover:bg-green-100 text-red-600"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
           ) : (
-            <AuthLinks />
+            <>
+              <Link
+                to="/login"
+                className="px-3 py-1 bg-white text-green-800 rounded font-semibold hover:bg-gray-100 transition"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="px-3 py-1 bg-white text-green-800 rounded font-semibold hover:bg-gray-100 transition"
+              >
+                Register
+              </Link>
+            </>
           )}
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-2">
-          <NavLinks mobile />
-          {user ? (
-            <UserDropdown user={user} onLogout={handleLogout} mobile />
-          ) : (
-            <AuthLinks mobile />
-          )}
-        </div>
-      )}
     </nav>
-  );
-}
-
-function NavLinks({ mobile = false }) {
-  const baseClasses = "block py-2 px-3";
-  const hover = "hover:bg-green-800 rounded";
-
-  const className = `${baseClasses} ${hover} ${mobile ? "text-lg" : ""}`;
-
-  return (
-    <>
-      <Link to="/home" className={className}>
-        Home
-      </Link>
-      <Link to="/dashboard-player" className={className}>
-        Book Turf
-      </Link>
-      <Link to="/dashboard-turf-owner" className={className}>
-        My Turf
-      </Link>
-      <Link to="/about" className={className}>
-        About
-      </Link>
-      <Link to="/contact-us" className={className}>
-        Contact
-      </Link>
-    </>
-  );
-}
-
-function AuthLinks({ mobile = false }) {
-  const className = `px-3 py-1 bg-white text-green-800 rounded font-semibold hover:bg-gray-100 transition block ${
-    mobile ? "w-full text-center" : ""
-  }`;
-
-  return (
-    <>
-      <Link to="/login" className={className}>
-        Login
-      </Link>
-      <Link to="/register" className={className}>
-        Register
-      </Link>
-    </>
-  );
-}
-
-function UserDropdown({ user, onLogout, mobile = false }) {
-  if (mobile) {
-    return (
-      <div className="text-white space-y-2">
-        <Link to="/profile" className="block py-2">
-          My Profile
-        </Link>
-        <Link to="/my-booking" className="block py-2">
-          My Bookings
-        </Link>
-        <button
-          onClick={onLogout}
-          className="block text-left w-full py-2 text-red-400"
-        >
-          Logout
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative group">
-      <Link to="/profile" className="flex items-center gap-2">
-        <img
-          src={user.photoURL || "/default-avatar.jpg"}
-          alt="Profile"
-          width={36}
-          height={36}
-          className="rounded-full border-2 border-white hover:scale-105 transition"
-        />
-        <span className="hidden md:inline font-medium">
-          {user.displayName || user.email.split("@")[0]}
-        </span>
-      </Link>
-
-      {/* Dropdown */}
-      <div className="absolute right-0 mt-2 w-48 bg-white text-green-900 rounded-md shadow-lg py-1 hidden group-hover:block z-50">
-        <Link to="/profile" className="block px-4 py-2 hover:bg-green-100">
-          My Profile
-        </Link>
-        <Link to="/my-booking" className="block px-4 py-2 hover:bg-green-100">
-          My Bookings
-        </Link>
-        <button
-          onClick={onLogout}
-          className="w-full text-left px-4 py-2 hover:bg-green-100 text-red-600"
-        >
-          Logout
-        </button>
-      </div>
-    </div>
   );
 }
