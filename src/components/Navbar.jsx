@@ -27,14 +27,8 @@ export default function Navbar() {
   return (
     <nav className="bg-green-900 text-white">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="text-xl font-bold">
-          PlayConnect
-        </Link>
-
-        {/* Hamburger Button (visible on mobile) */}
         <button
-          className="md:hidden text-white focus:outline-none"
+          className="text-white focus:outline-none"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <svg
@@ -51,14 +45,19 @@ export default function Navbar() {
             />
           </svg>
         </button>
+        {/* Left: Logo */}
+        <Link to="/" className="text-xl font-bold">
+          PlayConnect
+        </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex space-x-7 text-xl">
-          <NavLinks />
-        </div>
+        {/* Center: Hamburger for Mobile */}
+        <div className="flex md:hidden items-center gap-2"></div>
 
-        {/* Right Side: Auth/User */}
-        <div className="hidden md:flex items-center space-x-4">
+        {/* Right: Auth Buttons (Always visible) */}
+        <div className="flex items-center space-x-4">
+          <div className="hidden md:flex space-x-6 text-xl">
+            <NavLinks />
+          </div>
           {user ? (
             <UserDropdown user={user} onLogout={handleLogout} />
           ) : (
@@ -67,15 +66,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Links */}
       {mobileMenuOpen && (
         <div className="md:hidden px-4 pb-4 space-y-2">
           <NavLinks mobile />
-          {user ? (
-            <UserDropdown user={user} onLogout={handleLogout} mobile />
-          ) : (
-            <AuthLinks mobile />
-          )}
         </div>
       )}
     </nav>
@@ -85,7 +79,6 @@ export default function Navbar() {
 function NavLinks({ mobile = false }) {
   const baseClasses = "block py-2 px-3";
   const hover = "hover:bg-green-800 rounded";
-
   const className = `${baseClasses} ${hover} ${mobile ? "text-lg" : ""}`;
 
   return (
@@ -109,43 +102,26 @@ function NavLinks({ mobile = false }) {
   );
 }
 
-function AuthLinks({ mobile = false }) {
-  const className = `px-3 py-1 bg-white text-green-800 rounded font-semibold hover:bg-gray-100 transition block ${
-    mobile ? "w-full text-center" : ""
-  }`;
-
+function AuthLinks() {
   return (
-    <>
-      <Link to="/login" className={className}>
+    <div className="flex items-center space-x-3">
+      <Link
+        to="/login"
+        className="px-3 py-1 bg-white text-green-800 rounded font-semibold hover:bg-gray-100 transition"
+      >
         Login
       </Link>
-      <Link to="/register" className={className}>
+      <Link
+        to="/register"
+        className="px-3 py-1 bg-white text-green-800 rounded font-semibold hover:bg-gray-100 transition"
+      >
         Register
       </Link>
-    </>
+    </div>
   );
 }
 
-function UserDropdown({ user, onLogout, mobile = false }) {
-  if (mobile) {
-    return (
-      <div className="text-white space-y-2">
-        <Link to="/profile" className="block py-2">
-          My Profile
-        </Link>
-        <Link to="/my-booking" className="block py-2">
-          My Bookings
-        </Link>
-        <button
-          onClick={onLogout}
-          className="block text-left w-full py-2 text-red-400"
-        >
-          Logout
-        </button>
-      </div>
-    );
-  }
-
+function UserDropdown({ user, onLogout }) {
   return (
     <div className="relative group">
       <Link to="/profile" className="flex items-center gap-2">
@@ -161,7 +137,6 @@ function UserDropdown({ user, onLogout, mobile = false }) {
         </span>
       </Link>
 
-      {/* Dropdown */}
       <div className="absolute right-0 mt-2 w-48 bg-white text-green-900 rounded-md shadow-lg py-1 hidden group-hover:block z-50">
         <Link to="/profile" className="block px-4 py-2 hover:bg-green-100">
           My Profile
