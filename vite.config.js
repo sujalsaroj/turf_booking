@@ -2,8 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
-// https://vite.dev/config/
 export default defineConfig({
-  base: "/",
+  base: "/turf_booking/", // 👈 set the correct sub-path
   plugins: [react(), tailwindcss()],
 });
