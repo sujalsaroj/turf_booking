@@ -2,7 +2,6 @@
   "name": "turf_booking",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://sujalsaroj.github.io/turf_booking",
   "type": "module",
   "scripts": {
     "dev": "vite",
